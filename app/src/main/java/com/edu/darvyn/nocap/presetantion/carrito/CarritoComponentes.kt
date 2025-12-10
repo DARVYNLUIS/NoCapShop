@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +39,6 @@ fun CarritoItemCard(
                 .padding(12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Imagen del producto
             AsyncImage(
                 model = item.productoImagen,
                 contentDescription = item.productoNombre,
@@ -209,7 +209,7 @@ fun ResumenCarrito(
                 fontWeight = FontWeight.Bold
             )
 
-            Divider()
+            HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -280,7 +280,7 @@ fun ResumenCarrito(
                 }
             }
 
-            Divider()
+            HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),

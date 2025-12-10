@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -244,4 +245,25 @@ fun CrearUsuarioScreen(
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
+}
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+fun CrearUsuarioScreenPreview() {
+    val statePreview = CrearUsuarioUiState(
+        isLoading = false,
+        nombres = "Juan Pérez",
+        email = "juan.perez@example.com",
+        password = "12345678",
+        confirmPassword = "12345678",
+        errorNombre = null,
+        errorEmail = null,
+        errorPassword = null,
+        errorConfirmPassword = null
+    )
+
+    CrearUsuarioScreen(
+        state = statePreview,
+        onBack = {},
+        onEvent = {}
+    )
 }

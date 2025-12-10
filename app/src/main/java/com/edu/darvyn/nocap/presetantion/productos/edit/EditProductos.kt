@@ -54,11 +54,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
+import com.edu.darvyn.nocap.domain.model.Categoria
+import com.edu.darvyn.nocap.domain.model.Marcas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -561,4 +564,49 @@ private suspend fun saveImageToInternalStorage(context: Context, uri: Uri): Stri
             null
         }
     }
+}
+@Preview(showBackground = true, widthDp = 400, heightDp = 800)
+@Composable
+fun EditProductoDialogPreview() {
+    val mockState = EditProductoUiState(
+        isNew = true,
+        productoId = null,
+        nombre = "Gorra Nike",
+        descripcion = "Gorra deportiva de alta calidad",
+        precioVenta = "29.99",
+        stocks = "50",
+        productoImagen = null,
+        categoriaId = 1,
+        marcaId = 1,
+        listaTamano = listOf("S", "M"),
+        listaColores = listOf("Negro", "Blanco"),
+        listaCategoria = listOf(
+            Categoria(
+                categoriaId = 1, nombre = "Gorras",
+                descripcion = TODO(),
+                activa = TODO()
+            ),
+            Categoria(
+                categoriaId = 2, nombre = "Camisetas",
+                descripcion = TODO(),
+                activa = TODO()
+            )
+        ),
+        listaMarcas = listOf(
+            Marcas(
+                marcaId = 1, nombre = "Nike",
+                activa = TODO()
+            ),
+            Marcas(
+                marcaId = 2, nombre = "Adidas",
+                activa = TODO()
+            )
+        )
+    )
+
+    EditProductoDialog(
+        state = mockState,
+        onEvent = {},
+        onBack = {}
+    )
 }

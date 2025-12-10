@@ -1,5 +1,7 @@
 package com.edu.darvyn.nocap.presetantion.marcas.edit
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.darvyn.nocap.domain.model.Marcas
@@ -95,5 +97,36 @@ class EditMarcaViewModel @Inject constructor(
         marcaId = _state.value.marcaId ?: 0,
         nombre = _state.value.marcaNombre ?: "",
         activa = this.activa ?: false
+    )
+}
+@Composable
+@Preview(showBackground = true)
+fun PreviewEditMarcaDialog_Nueva() {
+    val mockState = EditMarcaUiState(
+        marcaId = null,
+        marcaNombre = "",
+        isNew = true
+    )
+
+    EditMarcaDialog(
+        state = mockState,
+        onEvent = {},
+        onBack = {}
+    )
+}
+
+@Composable
+@Preview(showBackground = true)
+fun PreviewEditMarcaDialog_Editar() {
+    val mockState = EditMarcaUiState(
+        marcaId = 1,
+        marcaNombre = "Nike",
+        isNew = false
+    )
+
+    EditMarcaDialog(
+        state = mockState,
+        onEvent = {},
+        onBack = {}
     )
 }

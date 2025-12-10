@@ -6,9 +6,9 @@ import com.edu.darvyn.nocap.domain.repository.MarcasRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ObserveAllMarcasUseCase @Inject constructor(
+open class ObserveAllMarcasUseCase @Inject constructor(
     private val marcasRepository: MarcasRepository
 ){
-    operator fun invoke() : Flow<Resource<List<Marcas>>> =
+    open operator fun invoke() : Flow<Resource<List<Marcas>>> =
         marcasRepository.observeAll()
 }

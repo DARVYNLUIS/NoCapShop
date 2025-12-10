@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PedidoViewModel @Inject constructor(
+open class PedidoViewModel @Inject constructor(
     private val pedidoRepository: PedidoRepository,
     private val observeUserLoggedUseCase : ObserveUserLoggedUseCase,
 

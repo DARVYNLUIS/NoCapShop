@@ -1,16 +1,9 @@
 package com.edu.darvyn.nocap.presetantion.usuario.PerfilUsuario
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -22,31 +15,16 @@ import androidx.compose.material.icons.outlined.Blinds
 import androidx.compose.material.icons.outlined.ExitToApp
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material.icons.outlined.Warning
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Snackbar
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.delay
 
 @Composable
 fun PerfilUsuarioScreen(
@@ -76,9 +54,9 @@ fun PerfilUsuario(
     goToOrdenesCompras: (Int) -> Unit,
     goToPedidos: (Int) -> Unit,
     goToPanelAdmin: (Int) -> Unit
-
 ) {
     var showSalirDialog by remember { mutableStateOf(false) }
+    var showSnackbar by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -99,13 +77,10 @@ fun PerfilUsuario(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    IconButton(onClick = {
-                        onBack()
-
-                    }) {
+                    IconButton(onClick = { onBack() }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            "Volver",
+                            contentDescription = "Volver",
                             tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
@@ -116,13 +91,10 @@ fun PerfilUsuario(
                         color = MaterialTheme.colorScheme.onSurface
                     )
 
-                    IconButton(onClick = {
-                        showSalirDialog = true
-
-                    }) {
+                    IconButton(onClick = { showSalirDialog = true }) {
                         Icon(
                             Icons.Outlined.ExitToApp,
-                            "Cerrar sesión",
+                            contentDescription = "Cerrar sesión",
                             tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
@@ -140,7 +112,7 @@ fun PerfilUsuario(
 
                 // Saludo
                 Text(
-                    text = "hola, " + state.usuario?.nombres,
+                    text = "Hola, ${state.usuario?.nombres}",
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onBackground
                 )
@@ -159,44 +131,35 @@ fun PerfilUsuario(
                         MenuOption(
                             icon = Icons.Outlined.ShoppingBag,
                             title = "Pedidos",
-                            onClick = {
-                                goToPedidos(state.usuario?.usuarioId!!)
-                            }
+                            onClick = { goToPedidos(state.usuario?.usuarioId!!) }
                         )
 
                         MenuOption(
                             icon = Icons.Outlined.Blinds,
                             title = "Ordenes de Compras",
-                            onClick = {
-                                goToOrdenesCompras(state.usuario?.usuarioId!!)
-                            }
+                            onClick = { goToOrdenesCompras(state.usuario?.usuarioId!!) }
                         )
 
                         HorizontalDivider(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             color = MaterialTheme.colorScheme.outlineVariant
                         )
+
                         if (state.usuario?.rol != 1) {
                             MenuOption(
                                 icon = Icons.Default.PersonPin,
                                 title = "Panel de administrador",
-                                onClick = {
-                                    goToPanelAdmin(state.usuario?.usuarioId!!)
-                                }
+                                onClick = { goToPanelAdmin(state.usuario?.usuarioId!!) }
                             )
                         }
                     }
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
-
-
-
             }
         }
 
         // Snackbar
-        var showSnackbar = false
         if (showSnackbar) {
             Snackbar(
                 modifier = Modifier
@@ -212,12 +175,13 @@ fun PerfilUsuario(
             }
 
             LaunchedEffect(showSnackbar) {
-                kotlinx.coroutines.delay(2000)
+                delay(2000)
                 showSnackbar = false
             }
         }
     }
 
+    // Dialogo de salir
     if (showSalirDialog) {
         AlertDialog(
             onDismissRequest = { showSalirDialog = false },
@@ -230,13 +194,13 @@ fun PerfilUsuario(
             },
             title = {
                 Text(
-                    text = "¿Cerrar Sesion?",
+                    text = "¿Cerrar Sesión?",
                     style = MaterialTheme.typography.titleLarge
                 )
             },
             text = {
                 Text(
-                    text = "Esta seguro de cerra la sesion",
+                    text = "¿Está seguro de cerrar la sesión?",
                     style = MaterialTheme.typography.bodyMedium
                 )
             },
@@ -251,7 +215,7 @@ fun PerfilUsuario(
                         containerColor = MaterialTheme.colorScheme.error
                     )
                 ) {
-                    Text("Eliminar")
+                    Text("Cerrar")
                 }
             },
             dismissButton = {
@@ -269,9 +233,16 @@ private fun MenuOption(
     title: String,
     onClick: () -> Unit
 ) {
+    val interactionSource = remember { MutableInteractionSource() } // ✅ Aquí estaba el problema
+
     Surface(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(
+                interactionSource = interactionSource,
+                indication = rememberRipple(),
+                onClick = onClick
+            ),
         color = MaterialTheme.colorScheme.surface
     ) {
         Row(

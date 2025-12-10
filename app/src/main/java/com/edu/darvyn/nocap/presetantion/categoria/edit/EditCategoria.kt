@@ -30,6 +30,10 @@ import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun EditCategoria(
@@ -192,4 +196,32 @@ fun EditCategoriaDialog(
             }
         }
     }
+}
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun EditCategoriaPreview() {
+    var state by remember {
+        mutableStateOf(
+            EditCategoriaUiState(
+                categoriaId = 1,
+                categoriaNombre = "Deportes",
+                categoriaDescripcion = "Categoría para artículos deportivos",
+                isNew = false
+            )
+        )
+    }
+
+    val fakeOnEvent: (EditCategoriaUiEvent) -> Unit = { event ->
+        state = when (event) {
+            is EditCategoriaUiEvent.CategoriaNombreChange -> state.copy(categoriaNombre = event.nombre)
+            is EditCategoriaUiEvent.CategoriaDescripcionChange -> state.copy(categoriaDescripcion = event.descripcion)
+            else -> state
+        }
+    }
+
+    EditCategoriaDialog(
+        state = state,
+        onEvent = fakeOnEvent,
+        onBack = {}
+    )
 }

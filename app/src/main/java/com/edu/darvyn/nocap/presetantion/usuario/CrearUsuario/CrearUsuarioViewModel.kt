@@ -1,5 +1,7 @@
 package com.edu.darvyn.nocap.presetantion.usuario.CrearUsuario
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.darvyn.nocap.domain.model.Usuario
@@ -8,6 +10,7 @@ import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.validateConfirmationP
 import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.validateEmailUser
 import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.validateNombreUser
 import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.validatePasswordUser
+import com.edu.darvyn.nocap.presetantion.usuario.crear.CrearUsuarioScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

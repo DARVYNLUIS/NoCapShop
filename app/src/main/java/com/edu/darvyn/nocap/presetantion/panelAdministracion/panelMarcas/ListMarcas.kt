@@ -1,5 +1,6 @@
 package com.edu.darvyn.nocap.presetantion.panelAdministracion.panelMarcas
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,10 +29,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.edu.darvyn.nocap.data.remote.Resource
 import com.edu.darvyn.nocap.domain.model.Marcas
+import com.edu.darvyn.nocap.domain.repository.MarcasRepository
+import com.edu.darvyn.nocap.domain.useCase.useCaseMarcas.ObserveAllMarcasUseCase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun MarcasContent(
@@ -130,4 +140,30 @@ fun  MarcaCard(marca: Marcas) {
             }
         }
     }
+}
+// Fake use case que devuelve un Flow con datos de prueba
+class FakeObserveAllMarcasUseCase(marcasRepository: MarcasRepository) :
+    ObserveAllMarcasUseCase(marcasRepository) {
+    override fun invoke(): Flow<Resource<List<Marcas>>> {
+        val marcasFake = listOf(
+            Marcas(marcaId = 1, nombre = "New Era", activa = true),
+            Marcas(marcaId = 2, nombre = "Adidas", activa = true),
+            Marcas(marcaId = 3, nombre = "Nike", activa = false)
+        )
+        return flowOf(Resource.Success(marcasFake))
+    }
+}
+
+@SuppressLint("ViewModelConstructorInComposable")
+@Preview(showBackground = true)
+@Composable
+fun MarcasContentPreview() {
+    val fakeViewModel = PanelMarcasViewModel(FakeObserveAllMarcasUseCase(
+        marcasRepository = TODO()
+    ))
+
+    MarcasContent(
+        viewModel = fakeViewModel,
+        goToGestion = {}
+    )
 }

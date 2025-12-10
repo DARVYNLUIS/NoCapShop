@@ -47,6 +47,7 @@ dependencies {
     implementation ("androidx.compose.ui:ui:1.6.0")
     implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.compose.ui.unit)
+    implementation(libs.androidx.work.runtime.ktx)
 
     //test
     testImplementation("junit:junit:4.13.2")

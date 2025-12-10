@@ -14,18 +14,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PanelMarcasViewModel @Inject constructor(
+open class PanelMarcasViewModel @Inject constructor(
     private val observeAllMarcasUseCase: ObserveAllMarcasUseCase,
 ): ViewModel() {
     private val _state = MutableStateFlow(PanelMarcasUiState(isLoading = true))
-    val state: StateFlow<PanelMarcasUiState> = _state.asStateFlow()
+    open val state: StateFlow<PanelMarcasUiState> = _state.asStateFlow()
 
     init {
         onEvent(PanelMarcasUiEvent.Load)
 
     }
 
-    fun onEvent(event: PanelMarcasUiEvent){
+    open fun onEvent(event: PanelMarcasUiEvent){
         when(event) {
             PanelMarcasUiEvent.Load -> observeMarca()
         }

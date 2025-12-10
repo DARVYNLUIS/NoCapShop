@@ -44,7 +44,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -422,12 +425,12 @@ fun ProductoItem(
 
 @Composable
 fun InfoChip(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     label: String,
     value: String,
     modifier: Modifier = Modifier,
-    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.secondaryContainer,
-    contentColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSecondaryContainer
+    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    contentColor: Color = MaterialTheme.colorScheme.onSecondaryContainer
 ) {
     Surface(
         modifier = modifier,
@@ -547,6 +550,66 @@ fun EliminarProductoDialog(
             }
         }
     }
+}
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+fun GestionProductosScreenPreview() {
+    val productosEjemplo = listOf(
+        Producto(
+            productoId = 1,
+            nombre = "Gorra Negra",
+            descripcion = "Gorra estilo snapback negra con logo bordado.",
+            precioVenta = 25.0,
+            stocks = 12,
+            activo = true,
+            listaTamanos = listOf("S", "M", "L"),
+            listaColores = listOf("Negro", "Gris"),
+            fechaCreacion = TODO(),
+            productoImagen = TODO(),
+            categoriaId = TODO(),
+            marcaId = TODO()
+        ),
+        Producto(
+            productoId = 2,
+            nombre = "Gorra Roja",
+            descripcion = "Gorra ajustable roja, ideal para deportes.",
+            precioVenta = 30.0,
+            stocks = 5,
+            activo = false,
+            listaTamanos = listOf("M", "L"),
+            listaColores = listOf("Rojo", "Blanco", "Negro"),
+            fechaCreacion = TODO(),
+            productoImagen = TODO(),
+            categoriaId = TODO(),
+            marcaId = TODO()
+        ),
+        Producto(
+            productoId = 3,
+            nombre = "Gorra Azul",
+            descripcion = "Gorra con visera plana y diseño urbano.",
+            precioVenta = 28.5,
+            stocks = 20,
+            activo = true,
+            listaTamanos = listOf("S", "M", "L", "XL"),
+            listaColores = listOf("Azul", "Celeste", "Negro", "Blanco"),
+            fechaCreacion = TODO(),
+            productoImagen = TODO(),
+            categoriaId = TODO(),
+            marcaId = TODO()
+        )
+    )
+
+    val statePreview = ListProductoUiState(
+        isLoading = false,
+        listProducto = productosEjemplo,
+        productoId = null
+    )
+
+    GestionProductosScreen(
+        state = statePreview,
+        onBack = {},
+        onEvent = {}
+    )
 }
 
 

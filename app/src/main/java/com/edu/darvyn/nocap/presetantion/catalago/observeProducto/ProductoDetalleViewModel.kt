@@ -1,8 +1,15 @@
 package com.edu.darvyn.nocap.presetantion.catalago.observeProducto
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.darvyn.nocap.data.remote.Resource
+import com.edu.darvyn.nocap.domain.model.Producto
 import com.edu.darvyn.nocap.domain.useCase.useCaseCarritos.AgregarProductoUseCase
 import com.edu.darvyn.nocap.domain.useCase.useCaseProducto.ObserveProductoByIdUseCase
 import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.Login.ObserveUserLoggedUseCase
@@ -164,3 +171,69 @@ class ObserveProductoViewModel @Inject constructor(
     }
 }
 
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun ObserveProductoScreenPreview() {
+    val productoEjemplo = Producto(
+        productoId = 1,
+        nombre = "Gorra Jordan",
+        descripcion = "Gorra deportiva Jordan, ligera y cómoda",
+        fechaCreacion = "2025-12-10",
+        productoImagen = "https://picsum.photos/300",
+        precioVenta = 25.0,
+        stocks = 10,
+        categoriaId = 1,
+        marcaId = 2,
+        activo = true,
+        listaTamanos = listOf("S", "M", "L"),
+        listaColores = listOf("Rojo", "Negro")
+    )
+
+    var state by remember {
+        mutableStateOf(
+            ProductoDetalleUiState(
+                productoId = productoEjemplo.productoId,
+                producto = productoEjemplo,
+                isLoading = false,
+                selectedTalla = "M",
+                selectedColor = "Rojo",
+                cantidad = 1
+            )
+        )
+    }
+
+    val fakeViewModel = object {
+        fun onEvent(event: ProductoDetalleUiEvent) {
+            state = when (event) {
+                is ProductoDetalleUiEvent.SelectTalla -> state.copy(selectedTalla = event.talla)
+                is ProductoDetalleUiEvent.SelectColor -> state.copy(selectedColor = event.color)
+                is ProductoDetalleUiEvent.ChangeCantidad -> state.copy(cantidad = event.cantidad)
+                else -> state
+            }
+        }
+    }
+
+    ObserveProductoScreenPreviewContent(
+        state = state,
+        onEvent = fakeViewModel::onEvent,
+        onNavigateBack = {}
+    )
+}
+
+@Composable
+fun ObserveProductoScreenPreviewContent(
+    state: ProductoDetalleUiState,
+    onEvent: (ProductoDetalleUiEvent) -> Unit,
+    onNavigateBack: () -> Unit
+) {
+    ProductoDetailContent(
+        producto = state.producto!!,
+        selectedTalla = state.selectedTalla,
+        selectedColor = state.selectedColor,
+        cantidad = state.cantidad,
+        onTallaSelected = { onEvent(ProductoDetalleUiEvent.SelectTalla(it)) },
+        onColorSelected = { onEvent(ProductoDetalleUiEvent.SelectColor(it)) },
+        onCantidadChanged = { onEvent(ProductoDetalleUiEvent.ChangeCantidad(it)) },
+        onAgregarAlCarrito = {}
+    )
+}

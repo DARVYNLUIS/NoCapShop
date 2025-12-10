@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -395,5 +396,29 @@ fun EliminarCategoriaDialog(
                 }
             }
         }
+    }
+}
+@Composable
+@Preview(showBackground = true)
+fun PreviewGestionCategoriasScreen() {
+    val mockCategorias = listOf(
+        Categoria(1, "Deportes", "Todo sobre deportes", true),
+        Categoria(2, "Tecnología", "Novedades tecnológicas", true),
+        Categoria(3, "Moda", "Tendencias y estilos", false),
+        Categoria(4, "Comida", "Recetas y restaurantes", true)
+    )
+
+    val mockState = ListCategoriaUiState(
+        isLoading = false,
+        listCategorias = mockCategorias,
+        categoriaId = null
+    )
+
+    MaterialTheme {
+        GestionCategoriasScreen(
+            state = mockState,
+            onBack = {},
+            onEvent = {}
+        )
     }
 }

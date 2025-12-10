@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -237,4 +238,24 @@ fun Login(
             }
         }
     }
+}
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+fun LoginScreenPreview() {
+    val statePreview = LoginUiState(
+        isLoading = false,
+        isExiste = false,
+        email = "juan.perez@example.com",
+        password = "12345678",
+        isVisiblepassword = false,
+        emailError = null,
+        passwordError = null
+    )
+
+    Login(
+        state = statePreview,
+        onEvent = {},
+        goToBack = {},
+        goToRegister = {}
+    )
 }

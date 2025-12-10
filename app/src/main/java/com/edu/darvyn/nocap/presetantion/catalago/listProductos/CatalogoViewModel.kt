@@ -16,13 +16,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CatalogoViewModel @Inject constructor(
+open class CatalogoViewModel @Inject constructor(
     private val observeAllProductosUseCase: ObserveAllProductoUseCase,
     private val observeAllMarcasUseCase: ObserveAllMarcasUseCase,
     private val observeProductoByMarcaUseCase: getProductoByMarcaUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(CatalogoUiState(isLoading = true))
-    val state: StateFlow<CatalogoUiState> = _state.asStateFlow()
+    open val state: StateFlow<CatalogoUiState> = _state.asStateFlow()
 
     init {
         onEvent(ListProductosUiEvent.LoadProductos)

@@ -6,7 +6,6 @@ import com.edu.darvyn.nocap.data.remote.dto.MarcasDto
 import com.edu.darvyn.nocap.data.remote.dto.ProductosDto
 import com.edu.darvyn.nocap.data.remote.dto.RequestLogin
 import com.edu.darvyn.nocap.data.remote.dto.UsuarioDto
-import com.edu.darvyn.nocap.domain.model.Producto
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(

@@ -177,7 +177,7 @@ class OrdenCompraRepositoryImpl @Inject constructor(
     override suspend fun countPagosPendientes(usuarioId: Int): Int {
         return try {
             ordenCompraDao.countPagosPendientes(usuarioId)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             0
         }
     }

@@ -23,7 +23,7 @@ class ProductoRepositoryImpl @Inject constructor(
         return flow {
             emit(Resource.Loading())
             try {
-                var productoRemote = remoteDataSource.observeAllProductos()
+                val productoRemote = remoteDataSource.observeAllProductos()
                 if (productoRemote.isNotEmpty()) {
                     productoDao.deleteAll()
                     productoDao.saveListProductos(productoRemote.map { it.dtoToEntity() })

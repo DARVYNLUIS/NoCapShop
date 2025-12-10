@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             if (validar()) {
                 _state.update { it.copy(isLoading = true) }
-                val result = iniciarSesionUseCase(_state.value.toRequest())
+                val result = iniciarSesionUseCase(toRequest())
                 result.onSuccess {
                     _state.update {
                         it.copy(
@@ -72,9 +72,9 @@ class LoginViewModel @Inject constructor(
         }
     }
     private fun validar(): Boolean {
-        var emailCorrecto =
+        val emailCorrecto =
             validateEmailUser(_state.value.email.toString())
-        var passwordCorrecto =
+        val passwordCorrecto =
             validatePasswordUser(_state.value.password.toString())
 
         _state.update {
@@ -84,9 +84,9 @@ class LoginViewModel @Inject constructor(
             )
         }
 
-        return passwordCorrecto.isValid == true && emailCorrecto.isValid == true
+        return passwordCorrecto.isValid && emailCorrecto.isValid
     }
-    fun LoginUiState.toRequest() : RequestLogin = RequestLogin(
+    fun toRequest(): RequestLogin = RequestLogin(
         email = _state.value.email!!,
         password = _state.value.password!!
     )

@@ -17,10 +17,10 @@ object AppModule {
     @Singleton
     fun provideNoCapDb(@ApplicationContext appContext: Context) =
         Room.databaseBuilder(
-            appContext,
-            NoCapDatabase::class.java,
-            "NoCap.db"
-        ).fallbackToDestructiveMigration()
+                appContext,
+                NoCapDatabase::class.java,
+                "NoCap.db"
+            ).fallbackToDestructiveMigration(false)
             .build()
 
     @Provides

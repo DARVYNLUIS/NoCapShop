@@ -44,17 +44,8 @@ class OrdenCompraViewModel @Inject constructor(
 
             val orden = ordenCompraRepository.getById(ordenId!!)
 
-            if (orden == null) {
-                _state.update { it.copy(isLoading = false, error = "Orden no encontrada") }
-                return@launch
-            }
-
             val carrito = carritoRepository.getById(orden.carritoId)
 
-            if (carrito == null) {
-                _state.update { it.copy(isLoading = false, error = "Carrito no asociado!") }
-                return@launch
-            }
             currentCarritoId = carrito.carritoId!!
             val subtotal = carrito.items.sumOf { it.subtotal }
             val itbis = subtotal * 0.18

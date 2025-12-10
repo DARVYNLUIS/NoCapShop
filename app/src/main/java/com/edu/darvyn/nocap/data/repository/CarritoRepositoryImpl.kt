@@ -41,8 +41,8 @@ class CarritoRepositoryImpl @Inject constructor(
                         CarritoItem(
                             carritoDetailsId = detail.carritoDetailsId,
                             productoId = detail.productoId,
-                            productoNombre = producto?.nombre ?: "Producto",
-                            productoImagen = producto?.productoImagen,
+                            productoNombre = producto.nombre,
+                            productoImagen = producto.productoImagen,
                             cantidad = detail.cantidad,
                             precioProducto = detail.precioProducto,
                             color = detail.color,
@@ -76,8 +76,8 @@ class CarritoRepositoryImpl @Inject constructor(
             CarritoItem(
                 carritoDetailsId = detail.carritoDetailsId,
                 productoId = detail.productoId,
-                productoNombre = producto?.nombre ?: "Producto desconocido",
-                productoImagen = producto?.productoImagen,
+                productoNombre = producto.nombre,
+                productoImagen = producto.productoImagen,
                 cantidad = detail.cantidad,
                 precioProducto = detail.precioProducto,
                 color = detail.color,

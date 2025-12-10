@@ -11,6 +11,6 @@ data class ProductosDto (
     val categoriaId: Int,
     val marcaId: Int,
     val activo: Boolean,
-    val tamaños: List<String>,
+    val tamanos: List<String>,
     val colores: List<String>
 )

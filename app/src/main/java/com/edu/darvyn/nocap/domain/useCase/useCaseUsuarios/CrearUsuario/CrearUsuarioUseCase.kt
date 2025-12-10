@@ -1,7 +1,6 @@
 package com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.CrearUsuario
 
 import com.edu.darvyn.nocap.data.local.mappers.domainToDto
-import com.edu.darvyn.nocap.data.remote.dto.RequestLogin
 import com.edu.darvyn.nocap.domain.model.Usuario
 import com.edu.darvyn.nocap.domain.repository.UsuarioRepository
 import com.edu.darvyn.nocap.domain.useCase.useCaseUsuarios.validateConfirmationPasswordUser

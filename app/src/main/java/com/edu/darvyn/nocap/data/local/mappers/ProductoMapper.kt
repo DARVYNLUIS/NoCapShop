@@ -15,7 +15,7 @@ fun ProductosDto.dtoToEntity(): ProductoEntity = ProductoEntity(
     fechaCreacion = fechaCreacionProducto,
     stocks = stocks,
     listaColores = colores,
-    listaTamanos = tamaños,
+    listaTamanos = tamanos,
     activo = activo
 )
 
@@ -62,7 +62,7 @@ fun Producto.toDto(): ProductosDto = ProductosDto(
     fechaCreacionProducto = fechaCreacion,
     stocks = stocks,
     colores = listaColores,
-    tamaños = listaTamanos,
+    tamanos = listaTamanos,
     activo = activo
 
 )

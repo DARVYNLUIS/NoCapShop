@@ -50,7 +50,7 @@ class CrearUsuarioViewModel @Inject constructor(
         viewModelScope.launch {
             if (validar()){
                 _state.update { it.copy(isLoading = true) }
-                val result = crearUsuarioUseCase(_state.value.toDto())
+                val result = crearUsuarioUseCase(toDto())
                 result.onSuccess {
                     _state.update {
                         it.copy(
@@ -66,14 +66,14 @@ class CrearUsuarioViewModel @Inject constructor(
     }
 
     private fun validar(): Boolean {
-        var emailCorrecto =
+        val emailCorrecto =
             validateEmailUser(_state.value.email.toString())
-        var passwordCorrecto =
+        val passwordCorrecto =
             validatePasswordUser(_state.value.password.toString())
-        var confirmpassword =
+        val confirmpassword =
             validateConfirmationPasswordUser(_state.value.password.toString(),
                 _state.value.confirmPassword.toString())
-        var nombreCorrecto =
+        val nombreCorrecto =
             validateNombreUser(_state.value.nombres.toString())
 
         _state.update {
@@ -84,10 +84,10 @@ class CrearUsuarioViewModel @Inject constructor(
                 errorConfirmPassword = confirmpassword.error
             )
         }
-        return passwordCorrecto.isValid == true && emailCorrecto.isValid == true && confirmpassword.isValid == true && nombreCorrecto.isValid == true
+        return passwordCorrecto.isValid && emailCorrecto.isValid && confirmpassword.isValid && nombreCorrecto.isValid
     }
 
-    fun CrearUsuarioUiState.toDto() : Usuario = Usuario(
+    fun toDto(): Usuario = Usuario(
         usuarioId = 0,
         nombres = _state.value.nombres!!,
         email = _state.value.email!!,

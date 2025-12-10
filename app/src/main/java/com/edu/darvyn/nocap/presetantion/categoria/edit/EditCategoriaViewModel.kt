@@ -86,9 +86,9 @@ class EditCategoriaViewModel @Inject constructor(
     }
 
     private fun validar(): Boolean {
-        var nombreCorrecto =
+        val nombreCorrecto =
             validateNombreCategoria(_state.value.categoriaNombre.toString())
-        var descripcionCorrecto =
+        val descripcionCorrecto =
             validateDescripcionCategoria(_state.value.categoriaDescripcion.toString())
 
         _state.update {
@@ -98,7 +98,7 @@ class EditCategoriaViewModel @Inject constructor(
             )
         }
 
-        return descripcionCorrecto.isValid == true && nombreCorrecto.isValid == true
+        return descripcionCorrecto.isValid && nombreCorrecto.isValid
     }
 
     fun EditCategoriaUiState.toDomain() = Categoria(

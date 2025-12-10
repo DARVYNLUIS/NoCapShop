@@ -139,7 +139,7 @@ class ObserveProductoViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            mensajeExito = result.data.toString() ?: "Producto agregado al carrito",
+                            mensajeExito = result.data.toString(),
                             selectedTalla = null,
                             selectedColor = null,
                             cantidad = 1,

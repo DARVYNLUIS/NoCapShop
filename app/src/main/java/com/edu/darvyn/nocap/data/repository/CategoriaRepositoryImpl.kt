@@ -25,7 +25,7 @@ class CategoriaRepositoryImpl @Inject constructor(
         return flow {
             emit(Resource.Loading())
             try {
-                var categoriaRemote = remoteDataSource.observeAllCategorias()
+                val categoriaRemote = remoteDataSource.observeAllCategorias()
                 if (categoriaRemote.isNotEmpty()) {
                     categoriaDao.deleteAll()
                     categoriaDao.saveList(categoriaRemote.map { it.dtoToEntity() })
@@ -52,7 +52,7 @@ class CategoriaRepositoryImpl @Inject constructor(
     }
 
     override suspend fun observeById(id: Int): Categoria {
-        var categoria = categoriaDao.getCategoria(id)
+        val categoria = categoriaDao.getCategoria(id)
         return  categoria.toDomain()
     }
 

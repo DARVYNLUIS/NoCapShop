@@ -79,7 +79,7 @@ class EditMarcaViewModel @Inject constructor(
     }
 
     private fun validar(): Boolean {
-        var nombreCorrecto =
+        val nombreCorrecto =
             validateNombreCategoria(_state.value.marcaNombre.toString())
 
         _state.update {
@@ -88,7 +88,7 @@ class EditMarcaViewModel @Inject constructor(
             )
         }
 
-        return nombreCorrecto.isValid == true
+        return nombreCorrecto.isValid
     }
 
     fun EditMarcaUiState.toDomain() = Marcas(

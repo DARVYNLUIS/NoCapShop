@@ -42,7 +42,7 @@ class UsuarioRepositoryImpl @Inject constructor(
 
 
     override suspend fun getUsuario(): Usuario? {
-        var usuario = usuarioDao.getUsuario()
+        val usuario = usuarioDao.getUsuario()
         return usuario?.toDomain()
     }
 

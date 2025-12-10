@@ -1,10 +1,8 @@
 package com.edu.darvyn.nocap.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cake
 import androidx.compose.material.icons.filled.DeliveryDining
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.PersonPin
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable

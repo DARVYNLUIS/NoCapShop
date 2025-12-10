@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -173,14 +172,12 @@ class EditProductoViewModel @Inject constructor(
 
     private fun saveProducto() {
         viewModelScope.launch {
-            if (true) {
-                _state.update { it.copy(isSaving = true) }
-                val result = saveProductoUseCase(state.value.toDomain())
-                result.onSuccess {
-                    _state.update { it.copy(isSaving = false, saved = true, productoId = 0) }
-                }.onFailure {
-                    _state.update { it.copy(isSaving = false) }
-                }
+            _state.update { it.copy(isSaving = true) }
+            val result = saveProductoUseCase(state.value.toDomain())
+            result.onSuccess {
+                _state.update { it.copy(isSaving = false, saved = true, productoId = 0) }
+            }.onFailure {
+                _state.update { it.copy(isSaving = false) }
             }
         }
     }

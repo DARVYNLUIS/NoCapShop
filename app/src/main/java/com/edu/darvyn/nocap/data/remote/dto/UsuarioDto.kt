@@ -4,6 +4,6 @@ data class UsuarioDto(
     val usuarioId: Int?,
     val nombres: String,
     val correo: String,
-    val contraseña: String?,
+    val contrasena: String?,
     val rolId: Int?
 )

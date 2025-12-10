@@ -57,7 +57,7 @@ class PedidoRepositoryImpl @Inject constructor(
     override suspend fun getById(id: Int): Pedido? {
         return try {
             pedidoDao.getById(id)?.toModel()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
@@ -89,7 +89,7 @@ class PedidoRepositoryImpl @Inject constructor(
     override suspend fun getByOrdenCompra(ordenCompraId: Int): Pedido? {
         return try {
             pedidoDao.getByOrdenCompra(ordenCompraId)?.toModel()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
@@ -126,7 +126,7 @@ class PedidoRepositoryImpl @Inject constructor(
     override suspend fun countPedidosActivos(usuarioId: Int): Int {
         return try {
             pedidoDao.countPedidosActivos(usuarioId)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             0
         }
     }

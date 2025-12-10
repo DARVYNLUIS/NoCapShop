@@ -24,7 +24,7 @@ class MarcasRepositoryImpl @Inject constructor(
         return flow {
             emit(Resource.Loading())
             try {
-                var marcaRemote = remoteDataSource.observeAllMarcas()
+                val marcaRemote = remoteDataSource.observeAllMarcas()
                 if (marcaRemote.isNotEmpty()) {
                     marcasDao.deleteAll()
                     marcasDao.saveList(marcaRemote.map { it.dtoToEntity() })
@@ -41,7 +41,7 @@ class MarcasRepositoryImpl @Inject constructor(
     }
 
     override suspend fun observeById(id: Int): Marcas {
-        var categoria = marcasDao.getMarcaById(id)
+        val categoria = marcasDao.getMarcaById(id)
         return  categoria.toDomain()
     }
 

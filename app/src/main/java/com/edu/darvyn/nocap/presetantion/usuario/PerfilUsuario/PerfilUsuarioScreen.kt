@@ -17,9 +17,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.outlined.ExitToApp
 import androidx.compose.material.icons.filled.PersonPin
 import androidx.compose.material.icons.outlined.Blinds
-import androidx.compose.material.icons.outlined.ExitToApp
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.AlertDialog
@@ -31,12 +31,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -121,7 +119,7 @@ fun PerfilUsuario(
 
                     }) {
                         Icon(
-                            Icons.Outlined.ExitToApp,
+                            Icons.AutoMirrored.Outlined.ExitToApp,
                             "Cerrar sesión",
                             tint = MaterialTheme.colorScheme.onSurface
                         )
@@ -196,26 +194,6 @@ fun PerfilUsuario(
         }
 
         // Snackbar
-        var showSnackbar = false
-        if (showSnackbar) {
-            Snackbar(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(16.dp),
-                action = {
-                    TextButton(onClick = { showSnackbar = false }) {
-                        Text("OK")
-                    }
-                }
-            ) {
-                Text("")
-            }
-
-            LaunchedEffect(showSnackbar) {
-                kotlinx.coroutines.delay(2000)
-                showSnackbar = false
-            }
-        }
     }
 
     if (showSalirDialog) {

@@ -25,6 +25,6 @@ fun Usuario.domainToDto() : UsuarioDto = UsuarioDto(
     usuarioId = usuarioId,
     nombres = nombres,
     correo = email,
-    contraseña = password,
+    contrasena = password,
     rolId = rol
 )

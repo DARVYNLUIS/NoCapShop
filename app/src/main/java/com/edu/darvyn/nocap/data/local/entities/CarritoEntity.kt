@@ -1,6 +1,5 @@
 package com.edu.darvyn.nocap.data.local.entities
 
-import android.R
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

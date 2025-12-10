@@ -6,7 +6,7 @@ import com.edu.darvyn.nocap.domain.model.Pedido
 
 fun PedidosEntity.toModel(): Pedido {
     return Pedido(
-        pedidoId = pedidoId!!,
+        pedidoId = pedidoId,
         ordenCompraId = ordenCompraId,
         usuarioId = usuarioId,
         estado = EstadoPedido.fromString(estado),

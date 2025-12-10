@@ -46,6 +46,11 @@ dependencies {
     implementation ("androidx.compose.material:material:1.6.0")
     implementation ("androidx.compose.ui:ui:1.6.0")
 
+    //test
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
     //imagenes
     implementation("io.coil-kt:coil-compose:2.5.0")
     //navigation

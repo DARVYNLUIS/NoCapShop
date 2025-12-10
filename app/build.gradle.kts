@@ -45,6 +45,8 @@ dependencies {
 
     implementation ("androidx.compose.material:material:1.6.0")
     implementation ("androidx.compose.ui:ui:1.6.0")
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.compose.ui.unit)
 
     //test
     testImplementation("junit:junit:4.13.2")
